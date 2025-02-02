@@ -1,8 +1,0 @@
-<services>
-  <service name="obs_scm">
-    <param name="scm">git</param>
-    <param name="url">https://github.com/huakim/obs-service-cpanspec.git</param>
-    <param name="revision">main</param>
-    <param name="extract">*</param>
-  </service>
-</services>
