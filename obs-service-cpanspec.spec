@@ -31,6 +31,7 @@ BuildArch:      noarch
 BuildRequires:  (perl-generators or rpm-build-perl)
 BuildRequires:  rpm_macro(_obs_service_dir)
 Requires:       perl(Module::Build)
+Requires:       cpan
 %{!?__perl_requires:%define __perl_requires %{_rpmconfigdir}/perl.req}
 
 %description

@@ -141,7 +141,6 @@ while (($key, $type) = each(%options)){
   }
 }
 (defined($outdir)) && (chdir "$outdir");
-#use Data::Dumper;
-#print(Dumper(\@ARGV));
-do '/usr/bin/cpanspec';
+
+system ('/usr/bin/cpanspec', @ARGV);
 }
