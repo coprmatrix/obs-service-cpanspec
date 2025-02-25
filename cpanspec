@@ -142,6 +142,6 @@ while (($key, $type) = each(%options)){
 }
 (defined($outdir)) && (chdir "$outdir");
 $ENV{PERL_MM_USE_DEFAULT}=1;
-my $fail=system('/usr/bin/cpan', '-u');
+my $fail=system('/usr/bin/cpan', '--help');
 system ('/usr/bin/cpanspec', @ARGV);
 }
