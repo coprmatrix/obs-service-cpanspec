@@ -40,6 +40,9 @@ Options:
 
 
 use Cwd;
+use File::HomeDir;
+use File::Path qw(make_path);
+use LWP::Simple;
 
 use strict;
 use warnings;
@@ -141,7 +144,33 @@ while (($key, $type) = each(%options)){
   }
 }
 (defined($outdir)) && (chdir "$outdir");
-$ENV{PERL_MM_USE_DEFAULT}=1;
-my $fail=system('/usr/bin/cpan', '--help');
+
+# Get the home directory of the current user
+my $home_dir = File::HomeDir->my_home;
+
+# Define the target directory and file name
+my $target_dir = "$home_dir/.local/share/.cpan/sources/modules";
+my $file_name = "02packages.details.txt.gz";
+my $file_path = "$target_dir/$file_name";
+
+# Check if the file exists
+if (-e $file_path) {
+    print "File '$file_path' already exists.\n";
+} else {
+    # Create the target directory and any necessary parent directories
+    make_path($target_dir) unless -d $target_dir;
+
+    # Download the file
+    my $url = "http://www.cpan.org/modules/$file_name";
+    my $result = getstore($url, $file_path);
+
+    if (is_success($result)) {
+        print "File '$file_name' downloaded successfully to '$target_dir'.\n";
+    } else {
+        warn "Failed to download '$file_name': " . status_message($result) . "\n";
+    }
+}
+symlink(".local/share/.cpan", "$home_dir/.cpan");
+
 system ('/usr/bin/cpanspec', @ARGV);
 }

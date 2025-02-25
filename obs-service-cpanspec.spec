@@ -20,7 +20,7 @@ Name:           obs-service-cpanspec
 Summary:        An OBS source service: Create spec files for cpan sources
 License:        GPL-2.0-or-later
 Group:          Development/Tools/Building
-Version:        0.9
+Version:        1.0
 Release:        0%{?autorelease}
 Source0:        cpanspec
 Source1:        cpanspec.service
