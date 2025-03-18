@@ -26,7 +26,7 @@ Source0:        cpanspec
 Source1:        cpanspec.service
 Source2:        LICENSE
 Requires:       bzip2
-Requires:       cpanspec
+Requires:       cpanspec > 2.00.00
 BuildArch:      noarch
 BuildRequires:  (perl-generators or rpm-build-perl)
 BuildRequires:  rpm_macro(_obs_service_dir)
