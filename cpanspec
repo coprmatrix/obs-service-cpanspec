@@ -42,6 +42,7 @@ Options:
 use Cwd;
 use File::HomeDir;
 use File::Path qw(make_path);
+use File::Copy;
 use LWP::Simple;
 
 use strict;
@@ -143,7 +144,14 @@ while (($key, $type) = each(%options)){
     push @ARGV, $key, substr($type, 2);
   }
 }
-(defined($outdir)) && (chdir "$outdir");
+
+
+if (defined($outdir)) {
+  my $yaml_src = "cpanspec.yml";
+  my $yaml_target = "$outdir/cpanspec.yml"; 
+  copy($yaml_src, $yaml_target) if -e $yaml_src && !-e $yaml_target;
+  chdir "$outdir";
+}
 
 # Get the home directory of the current user
 my $home_dir = File::HomeDir->my_home;
